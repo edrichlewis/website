@@ -39,7 +39,7 @@ pipeline {
                     //docker.withRegistry('https://docker.io/', "${DOCKER_CREDENTIALS}") {
                         docker.image("${DOCKER_IMAGE}").push()
                         
-                    }
+                   // }
                 }
             }
         }
