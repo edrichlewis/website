@@ -24,10 +24,19 @@ pipeline {
                 }
             }
         }
+        stage('Login to Docker Hub'){
+            steps{
+                script{
+                    withCredentials([usernamePassword(credentialsId:"${DOCKER_CREDENTIALS}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY"
+                    }
+                }
+            }
+        }
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://docker.io/', "${DOCKER_CREDENTIALS}") {
+                    //docker.withRegistry('https://docker.io/', "${DOCKER_CREDENTIALS}") {
                         docker.image("${DOCKER_IMAGE}").push()
                         
                     }
