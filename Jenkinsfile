@@ -9,14 +9,17 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo "Checking out branch: ${env.BRANCH_NAME}"
-                git branch: "${env.BRANCH_NAME}", credentialsId: 'GitHub', url: 'https://github.com/edrichlewis/website.git'
+                script {
+                    def branch = env.BRANCH_NAME ?: 'master'
+                    echo "Checking out branch: ${branch}"
+                    git branch: branch, credentialsId: 'GitHub', url: 'https://github.com/edrichlewis/website.git'
+                }
             }
         }
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("${DOCKER_IMAGE}", "-f DOCKERFILE .")
+                    docker.build("${DOCKER_IMAGE}", "-f Dockerfile .")
                 }
             }
         }
@@ -32,9 +35,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    if (env.GIT_BRANCH == 'master') {
+                    if (env.BRANCH_NAME == 'master') {
                         sh "docker run -d -p 82:80 ${DOCKER_IMAGE}"
-                    } else if (env.GIT_BRANCH == 'develop') {
+                    } else if (env.BRANCH_NAME == 'develop') {
                         echo "Build completed. Not deploying."
                     }
                 }
