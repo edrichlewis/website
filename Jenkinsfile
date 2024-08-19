@@ -19,7 +19,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    whoami
+                    sh 'whoami'
                     docker.build("${DOCKER_IMAGE}", "-f Dockerfile .")
                 }
             }
