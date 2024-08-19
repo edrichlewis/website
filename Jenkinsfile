@@ -28,8 +28,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://docker.io/', "${DOCKER_CREDENTIALS}") {
-                        def image = docker.image("${DOCKER_IMAGE}")
-                        image.push()
+                        docker.image("${DOCKER_IMAGE}").push()
+                        
                     }
                 }
             }
