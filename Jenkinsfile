@@ -27,7 +27,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://hub.docker.com/', "${DOCKER_CREDENTIALS}") {
+                    docker.withRegistry('https://docker.io/', "${DOCKER_CREDENTIALS}") {
                         docker.image("${DOCKER_IMAGE}").push()
                     }
                 }
