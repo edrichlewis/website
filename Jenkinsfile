@@ -9,6 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                echo "Checking out branch: ${env.GIT_BRANCH}"
                 git branch: "${env.BRANCH_NAME}", credentialsId: 'GitHub', url: 'https://github.com/edrichlewis/website.git'
             }
         }
