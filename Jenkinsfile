@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: "${env.BRANCH_NAME}", url: 'https://github.com/edrichlewis/website.git'
+                git branch: "${env.BRANCH_NAME}", credentialsId: 'GitHub', url: 'https://github.com/edrichlewis/website.git'
             }
         }
         stage('Build Docker Image') {
