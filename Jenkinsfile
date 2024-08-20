@@ -37,7 +37,10 @@ pipeline {
             steps {
                 script {
                     //docker.withRegistry('https://docker.io/', "${DOCKER_CREDENTIALS}") {
-                        docker.image("${DOCKER_IMAGE}").push()
+                    //withCredentials([usernamePassword(credentialsId: 'docker-credentials-id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                      //  sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+                     //   docker.image("${DOCKER_IMAGE}").push()
+                      sh 'docker push docker.io/${DOCKER_IMAGE}'
                         
                    // }
                 }
