@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'slave1'
+    }
 
     environment {
         DOCKER_IMAGE = "edrichlewis/apache-image:${env.BUILD_ID}"
