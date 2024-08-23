@@ -5,7 +5,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "edrichlewis/apache-image:${env.BUILD_ID}"
-        DOCKER_CREDENTIALS = 'docker-credentials-id'
+        DOCKERHUB_CREDENTIALS = credentials("b1912fc2-78d7-4649-a81f-d9c91f568cc7")
     }
 
     stages {
@@ -29,8 +29,8 @@ pipeline {
         stage('Login to Docker Hub'){
             steps{
                 script{
-                    withCredentials([usernamePassword(credentialsId:"${DOCKER_CREDENTIALS}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                        sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY"
+                    withCredentials([usernamePassword(credentialsId:"${DOCKERHUB_CREDENTIALS}", usernameVariable: 'DOCKERHUB_CREDENTIALS_USR', passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
+                        sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin $DOCKER_REGISTRY"
                     }
                 }
             }
