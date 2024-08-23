@@ -99,11 +99,12 @@ pipeline {
                     // sh 'sudo docker push edrichlewis/proj2'
                     // withDockerRegistry(credentialsId: '76607488-2619-4d99-a175-1ab9a1cd2721', url: 'https://index.docker.io/v1/') {
                     //     sh 'sudo docker push edrichlewis/proj2'
+                // }
                   withCredentials([usernamePassword(credentialsId:"${DOCKERHUB_CREDENTIALS}", usernameVariable: 'DOCKERHUB_CREDENTIALS_USR', passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
                         sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin $DOCKER_REGISTRY"
                     }
                   echo "Checking out branch: ${env.BRANCH_NAME}"
-                    }
+                    
                 }
             }
         }
@@ -129,4 +130,4 @@ pipeline {
         }
     }
 }
-
+}
