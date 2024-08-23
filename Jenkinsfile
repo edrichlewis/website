@@ -105,6 +105,7 @@ pipeline {
             steps {
                 script {
                      if (env.BRANCH_NAME == 'master') {
+                        echo "Starting deployment on master branch"
                         sh "docker ps -a"
                         sh "docker rm -f c1"
                         sh "docker run -d --name c1 -p 82:80 edrichlewis/proj2"
