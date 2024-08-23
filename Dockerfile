@@ -6,6 +6,7 @@ RUN apt-get update && \
 
 # WORKDIR /var/www/html
 COPY index.html /var/www/html/
+COPY images /var/www/html/images
 
 EXPOSE 80 82
 
