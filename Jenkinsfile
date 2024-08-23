@@ -95,6 +95,7 @@ pipeline {
                     sh 'sudo docker build . -t edrichlewis/proj2'
                     sh 'sudo docker login -u ${DOCKERHUB_CREDENTIALS_USR} -p ${DOCKERHUB_CREDENTIALS_PSW}'
                     sh 'sudo docker push edrichlewis/proj2'
+                  echo "Checking out branch: ${branch}"
                 }
             }
         }
@@ -104,6 +105,7 @@ pipeline {
             }
             steps {
                 script {
+                  echo "Checking out branch: ${branch}"
                      if (env.BRANCH_NAME == 'master') {
                         echo "Checking out branch: ${branch}"
                         echo "Starting deployment on master branch"
