@@ -105,12 +105,14 @@ pipeline {
             steps {
                 script {
                      if (env.BRANCH_NAME == 'master') {
+                        echo "Checking out branch: ${branch}"
                         echo "Starting deployment on master branch"
                         sh "docker ps -a"
                         sh "docker rm -f c1"
                         sh "docker run -d --name c1 -p 82:80 edrichlewis/proj2"
                         sh "docker ps"
                     } else if (env.BRANCH_NAME == 'develop') {
+                        echo "Checking out branch: ${branch}"
                         echo "Build completed. Not deploying."
                 }
             }
