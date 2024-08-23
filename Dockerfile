@@ -7,4 +7,6 @@ RUN apt-get update && \
 # WORKDIR /var/www/html
 COPY index.html /var/www/html/
 
+EXPOSE 80 82
+
 CMD [ "apache2ctl", "-D", "FOREGROUND" ]
