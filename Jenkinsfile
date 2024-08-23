@@ -105,7 +105,8 @@ pipeline {
             steps {
                 script {
                      if (env.BRANCH_NAME == 'master') {
-                        sh "docker run -d -p 82:80 edrichlewis/proj2"
+                        // sh "docker rm -f c1"
+                        sh "docker run -d --name c1 -p 82:80 edrichlewis/proj2"
                     } else if (env.BRANCH_NAME == 'develop') {
                         echo "Build completed. Not deploying."
                 }
