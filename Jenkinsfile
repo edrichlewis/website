@@ -83,6 +83,8 @@ pipeline {
             steps {
                 script {
                     git'https://github.com/edrichlewis/website.git'
+                   env.BRANCH_NAME = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+                    echo "Checking out branch: ${env.BRANCH_NAME}"
                 }
             }
         }
